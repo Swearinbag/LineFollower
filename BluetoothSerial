@@ -1,0 +1,23 @@
+void setup()
+{
+  Serial.begin(9600);
+  Serial1.begin(9600);
+  while(!Serial);
+  Serial.println("Ready");
+}
+
+void loop()
+{
+  //Ontvangen instructies van Serial monitor doorsturen naar Bluetooth module
+  if(Serial.available())
+  {
+    String command = Serial.readStringUntil('\r\n');
+    Serial1.println(command);
+  }
+    //Ontvangen instructies van Bluetooth module doorsturen naar Serial monitor
+  if(Serial1.available())
+  {
+    String command = Serial1.readStringUntil('\r\n');
+    Serial.println(command);
+  }
+}
